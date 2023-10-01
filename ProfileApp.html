@@ -61,6 +61,11 @@
     // Get a reference to the Firebase Realtime Database
     const db = getDatabase();
 
+    var findName = document.querySelector("#findName");
+    var findBirthday = document.querySelector("#findBirthday");
+    var findHeight= document.querySelector("#findHeight");
+    var findWeight = document.querySelector("#findWeight");
+
     // Function to fetch user profiles from Firebase RTDB
     function fetchUserProfiles() {
         const dbref = ref(db);
@@ -69,11 +74,12 @@
         const userId2 = "OjSzyUXayUgcH8Ql5HLLjNoIl0G2/";
 
         // Fetch User 1 profile
-        get(ref(db, userId1))
+        get(child(ref(db, userId1)))
             .then((snapshot) => {
-                document.getElementById("userBirthday1").textContent = snapshot.val().Birthday;
-                document.getElementById("userHeight1").textContent = snapshot.val().Height;
-                document.getElementById("userWeight1").textContent = snapshot.val().Weight;
+                findName.innerHTML = "Name: " + snapshot.val().Name;
+                findBirthday.innerHTML = "Birthday: " + snapshot.val().Birthday;
+                findHeight.innerHTML = "Height: " + snapshot.val().Height;
+                findWeight.innerHTML = "Weight: " + snapshot.val().Weight;
             });
 
 // Fetch User 2 profile
