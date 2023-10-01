@@ -4,38 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile App</title>
+    <title>Document</title>
     <style>
-        body { text-align: center; }
-        #banner { max-width: 100%; height: auto; }
-        #profileContainer { margin: 0 auto; max-width: 600px; }
-        .profile { margin: 20px; padding: 10px; border: 1px solid #ccc; }
-        input { width: 120px; }
+        body {text-align: center;}
+        #enterDetails {float: left; width: 50%;  background-color: darkslategray; color: floralwhite;}
+        #findDetails {float: left; width: 50%; background-color: floralwhite; color: darkslategray;}
+        input {width: 120px;}
     </style>
 </head>
 <body>
-<div id="banner">
-    <img src="https://raw.githubusercontent.com/Giorgio72001/Giorgio72001.github.io/main/Sample%20Text.png" alt="Banner Image" style="max-width: 50%; height: auto; max-height: 50px;">
-</div>
-<div id="profileContainer">
-    <h1>User Profiles</h1>
-    <div id="profile">
-        <h2>User 1 Profile</h2>
-        <p><strong>Birthday:</strong> <span id="userBirthday1">User1Birthday</span></p>
-        <p><strong>Height:</strong> <span id="userHeight1">User1Height</span></p>
-        <p><strong>Weight:</strong> <span id="userWeight1">User1Weight</span></p>
-    </div>
-    <div id="profile">
-        <h2>User 2 Profile</h2>
-        <p><strong>Birthday:</strong> <span id="userBirthday2">User2Birthday</span></p>
-        <p><strong>Height:</strong> <span id="userHeight2">User2Height</span></p>
-        <p><strong>Weight:</strong> <span id="userWeight2">User2Weight</span></p>
-    </div>
-</div>
+    <div id="enterDetails">
+        <h1>Enter details</h1>
 
-<script type="module">
+        <h4>ID</h4> 
+        <input id="enterID" type="text"> 
 
-    // Import Firebase modules
+        <h4>Name</h4> 
+        <input id="enterName" type="text"> 
+
+        <h4>Age</h4> 
+        <input id="enterAge" type="number"> <br><br>
+
+        <button id="insert">INSERT</button>
+        <button id="update">UPDATE</button>
+        <button id="remove">REMOVE</button> <br><br>
+    </div>
+
+    <div id="findDetails">
+        <h1>Find by ID</h1>
+        <h4>ID</h4>
+        <input id="findID" type="text"> <br><br>
+        <button id="find">FIND</button>
+        <h3 id="findName" type="text"></h3>
+        <h3 id="findAge" type="number"></h3> <br><br>
+    </div>
+    
+
+    <script type="module">
+
+        // Import Firebase modules
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
 
@@ -55,46 +62,84 @@
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
 
-    // Import Firebase Realtime Database module
-    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+        import {getDatabase, ref, get, set, child, update, remove}
+        from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 
-    // Get a reference to the Firebase Realtime Database
-    const db = getDatabase();
+        const db = getDatabase();
 
-    var findName = document.querySelector("#findName");
-    var findBirthday = document.querySelector("#findBirthday");
-    var findHeight= document.querySelector("#findHeight");
-    var findWeight = document.querySelector("#findWeight");
+        var enterID = document.querySelector("#enterID");
+        var enterName = document.querySelector("#enterName");
+        var enterAge = document.querySelector("#enterAge");
+        var findID = document.querySelector("#findID");
+        var findName = document.querySelector("#findName");
+        var findAge = document.querySelector("#findAge");
+      
 
-    // Function to fetch user profiles from Firebase RTDB
-    function fetchUserProfiles() {
-        const dbref = ref(db);
-        // Hardcoded user IDs
-        const userId1 = "5nodsgw8dHRCFYm7OKelwY79IS92/";
-        const userId2 = "OjSzyUXayUgcH8Ql5HLLjNoIl0G2/";
+        var insertBtn = document.querySelector("#insert");
+        var updateBtn = document.querySelector("#update");
+        var removeBtn = document.querySelector("#remove");
+        var findBtn = document.querySelector("#find");
 
-        // Fetch User 1 profile
-        get(child(ref(db, userId1)))
-            .then((snapshot) => {
-                findName.innerHTML = "Name: " + snapshot.val().Name;
-                findBirthday.innerHTML = "Birthday: " + snapshot.val().Birthday;
-                findHeight.innerHTML = "Height: " + snapshot.val().Height;
-                findWeight.innerHTML = "Weight: " + snapshot.val().Weight;
+        function InsertData() {
+            set(ref(db, "People/"+ enterID.value),{
+                Name: enterName.value,
+                ID: enterID.value,
+                Age: enterAge.value
+            })
+            .then(()=>{
+                alert("Data added successfully");
+            })
+            .catch((error)=>{
+                alert(error);
             });
+        }
 
-// Fetch User 2 profile
-        get(ref(db, userId2))
-            .then((snapshot) => {
-                document.getElementById("userBirthday2").textContent = snapshot.val().Birthday;
-                document.getElementById("userHeight2").textContent = snapshot.val().Height;
-                document.getElementById("userWeight2").textContent = snapshot.val().Weight;
+        function FindData() {
+            const dbref = ref(db);
+
+            get(child(dbref, "People/" + findID.value))
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    findName.innerHTML = "Name: " + snapshot.val().Name;
+                    findAge.innerHTML = "Age: " + snapshot.val().Age;
+                } else {
+                    alert("No data found");
+                }
+            })
+            .catch((error)=>{
+                alert(error)
+            })
+            
+        }
+
+        function UpdateData(){
+            update(ref(db, "People/"+ enterID.value),{
+                Name: enterName.value,
+                Age: enterAge.value
+            })
+            .then(()=>{
+                alert("Data updated successfully");
+            })
+            .catch((error)=>{
+                alert(error);
             });
+        }
 
-    }
+        function RemoveData(){
+            remove(ref(db, "People/"+ enterID.value))
+            .then(()=>{
+                alert("Data deleted successfully");
+            })
+            .catch((error)=>{
+                alert(error);
+            });
+        }
 
-    // Call the function to fetch user profiles
-    fetchUserProfiles();
+        insertBtn.addEventListener('click', InsertData);
+        updateBtn.addEventListener('click', UpdateData);
+        removeBtn.addEventListener('click', RemoveData);
+        findBtn.addEventListener('click', FindData);
 
-</script>
+      </script>
 </body>
 </html>
