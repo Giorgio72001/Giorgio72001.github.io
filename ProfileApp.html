@@ -66,32 +66,19 @@
         // Fetch User 1 profile
         get(ref(db, "People/" + userId1))
             .then((snapshot) => {
-                if (snapshot.exists()) {
-                    document.getElementById("userBirthday1").textContent = snapshot.val().Birthday;
-                    document.getElementById("userHeight1").textContent = snapshot.val().Height;
-                    document.getElementById("userWeight1").textContent = snapshot.val().Weight;
-                } else {
-                    alert("User 1 profile not found");
-                }
-            })
-            .catch((error) => {
-                alert(error);
+                document.getElementById("userBirthday1").textContent = snapshot.val().Birthday;
+                document.getElementById("userHeight1").textContent = snapshot.val().Height;
+                document.getElementById("userWeight1").textContent = snapshot.val().Weight;
             });
 
         // Fetch User 2 profile
         get(ref(db, "People/" + userId2))
             .then((snapshot) => {
-                if (snapshot.exists()) {
-                    document.getElementById("userBirthday2").textContent = snapshot.val().Birthday;
-                    document.getElementById("userHeight2").textContent = snapshot.val().Height;
-                    document.getElementById("userWeight2").textContent = snapshot.val().Weight;
-                } else {
-                    alert("User 2 profile not found");
-                }
-            })
-            .catch((error) => {
-                alert(error);
+                document.getElementById("userBirthday2").textContent = snapshot.val().Birthday;
+                document.getElementById("userHeight2").textContent = snapshot.val().Height;
+                document.getElementById("userWeight2").textContent = snapshot.val().Weight;
             });
+
     }
 
     // Call the function to fetch user profiles
