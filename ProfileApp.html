@@ -64,11 +64,11 @@
     // Function to fetch user profiles from Firebase RTDB
     function fetchUserProfiles() {
         // Hardcoded user IDs
-        const userId1 = "5nodsgw8dHRCFYm7OKelwY79IS92";
-        const userId2 = "OjSzyUXayUgcH8Ql5HLLjNoIl0G2";
+        const userId1 = "5nodsgw8dHRCFYm7OKelwY79IS92/";
+        const userId2 = "OjSzyUXayUgcH8Ql5HLLjNoIl0G2/";
 
         // Fetch User 1 profile
-        get(ref(db, "People/" + userId1))
+        get(ref(db, userId1))
             .then((snapshot) => {
                 document.getElementById("userBirthday1").textContent = snapshot.val().Birthday;
                 document.getElementById("userHeight1").textContent = snapshot.val().Height;
@@ -76,7 +76,7 @@
             });
 
 // Fetch User 2 profile
-        get(ref(db, "People/" + userId2))
+        get(ref(db, userId2))
             .then((snapshot) => {
                 document.getElementById("userBirthday2").textContent = snapshot.val().Birthday;
                 document.getElementById("userHeight2").textContent = snapshot.val().Height;
