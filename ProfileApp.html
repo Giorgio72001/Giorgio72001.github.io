@@ -21,10 +21,10 @@
         <h1>User Profiles</h1>
         <div id="profile1">
             <h2>User 1 Profile</h2>
-            <p><strong>Name:</strong> <span id="userName1">Loading...</span></p>
-            <p><strong>Birthday:</strong> <span id="userBirthday1">Loading...</span></p>
-            <p><strong>Height:</strong> <span id="userHeight1">Loading...</span></p>
-            <p><strong>Weight:</strong> <span id="userWeight1">Loading...</span></p>
+            <p><strong>Name:</strong> <span id="name">Loading...</span></p>
+            <p><strong>Birthday:</strong> <span id="birthday">Loading...</span></p>
+            <p><strong>Height:</strong> <span id="height">Loading...</span></p>
+            <p><strong>Weight:</strong> <span id="weight">Loading...</span></p>
         </div>
         <div id="profile2">
             <h2>User 2 Profile</h2>
@@ -67,22 +67,28 @@
         // Reference to the database
         const dbRef = ref(db);
 
+        var findName1 = document.querySelector("#name");
+        var findBirthday1 = document.querySelector("#birthday");
+        var findHeight1 = document.querySelector("#height");
+        var findWeight1 = document.querySelector("#weight");
+
         // Fetch and display user 1 profile
-        get(child(dbRef, `users/${userId1}`))
-            .then((snapshot) => {
-                if (snapshot.exists()) {
-                    const user1Data = snapshot.val();
-                    document.getElementById("userName1").textContent = "Name: " + user1Data.name || "N/A";
-                    document.getElementById("userBirthday1").textContent = "Birthday: " + user1Data.birthday || "N/A";
-                    document.getElementById("userHeight1").textContent = "Height: " + user1Data.height || "N/A";
-                    document.getElementById("userWeight1").textContent = "Weight: " + user1Data.weight || "N/A";
+        get(child(dbref, userID1))
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    findName1.innerHTML = "Name: " + snapshot.val().Name;
+                    findBirthday1.innerHTML = "Birthday: " + snapshot.val().Birthday;
+                    findHeight1.innerHTML = "Height: " + snapshot.val().Height;
+                    findWeight1.innerHTML = "Weight: " + snapshot.val().Weight;
                 } else {
-                    document.getElementById("userName1").textContent = "User 1 not found";
+                    alert("No data found");
                 }
             })
-            .catch((error) => {
-                console.error("Error fetching user 1 profile:", error);
-            });
+            .catch((error)=>{
+                alert(error)
+            })
+            
+        }
 
         // Fetch and display user 2 profile
         get(child(dbRef, `users/${userId2}`))
