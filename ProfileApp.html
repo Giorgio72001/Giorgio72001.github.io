@@ -19,14 +19,14 @@
 </div>
 <div id="profileContainer">
     <h1>User Profiles</h1>
-    <div id="profile">
+    <div id="profile1">
         <h2>User 1 Profile</h2>
         <p><strong>Name:</strong> <span id="userName1">User1Name</span></p>
         <p><strong>Birthday:</strong> <span id="userBirthday1">User1Birthday</span></p>
         <p><strong>Height:</strong> <span id="userHeight1">User1Height</span></p>
         <p><strong>Weight:</strong> <span id="userWeight1">User1Weight</span></p>
     </div>
-    <div id="profile">
+    <div id="profile2">
         <h2>User 2 Profile</h2>
         <p><strong>Name:</strong> <span id="userName2">User2Name</span></p>
         <p><strong>Birthday:</strong> <span id="userBirthday2">User2Birthday</span></p>
@@ -67,7 +67,13 @@
         var findHeight = document.querySelector("#findHeight");
         var findWeight = document.querySelector("#findWeight");
 
-        
+        get(user1Ref).then((snapshot) => {
+            const user1Data = snapshot.val();
+            document.getElementById("userName1").textContent = user1Data.name || "N/A";
+            document.getElementById("userBirthday1").textContent = user1Data.birthday || "N/A";
+            document.getElementById("userHeight1").textContent = user1Data.height || "N/A";
+            document.getElementById("userWeight1").textContent = user1Data.weight || "N/A";
+    });
 
       </script>
 </body>
