@@ -62,26 +62,27 @@
 
         const db = getDatabase();
 
-        var findName = document.querySelector("#findName");
-        var findBirthday = document.querySelector("#findBirthday");
-        var findHeight = document.querySelector("#findHeight");
-        var findWeight = document.querySelector("#findWeight");
+        var findName1 = document.querySelector("#findName");
+        var findBirthday1 = document.querySelector("#findBirthday");
+        var findHeight1 = document.querySelector("#findHeight");
+        var findWeight1 = document.querySelector("#findWeight");
+        var findName2 = document.querySelector("#findName");
+        var findBirthday2 = document.querySelector("#findBirthday");
+        var findHeight2 = document.querySelector("#findHeight");
+        var findWeight2 = document.querySelector("#findWeight");
 
         const userId1 = "5nodsgw8dHRCFYm7OKelwY79IS92";
         const userId2 = "OjSzyUXayUgcH8Ql5HLLjNoIl0G2";
-
-        const user1Ref = ref(database, `users/${userId1}`);
-        const user2Ref = ref(database, `users/${userId2}`);
         
         const dbref = ref(db);
 
             get(child(dbref, findID.value))
             .then((snapshot)=>{
                 if(snapshot.exists()){
-                    findName.innerHTML = "Name: " + snapshot.val().Name;
-                    findBirthday.innerHTML = "Birthday: " + snapshot.val().Birthday;
-                    findHeight.innerHTML = "Height: " + snapshot.val().Height;
-                    findWeight.innerHTML = "Weight: " + snapshot.val().Weight;
+                    findName1.innerHTML = "Name: " + snapshot.val().Name;
+                    findBirthday1.innerHTML = "Birthday: " + snapshot.val().Birthday;
+                    findHeight1.innerHTML = "Height: " + snapshot.val().Height;
+                    findWeight1.innerHTML = "Weight: " + snapshot.val().Weight;
                 } else {
                     alert("No data found");
                 }
@@ -92,14 +93,22 @@
             
         }
 
-
-        get(user2Ref).then((snapshot) => {
-            const user2Data = snapshot.val();
-            document.getElementById("userName2").textContent = user2Data.name || "N/A";
-            document.getElementById("userBirthday2").textContent = user2Data.birthday || "N/A";
-            document.getElementById("userHeight2").textContent = user2Data.height || "N/A";
-            document.getElementById("userWeight2").textContent = user2Data.weight || "N/A";
-    });
+        get(child(dbref, findID.value))
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    findName2.innerHTML = "Name: " + snapshot.val().Name;
+                    findBirthday2.innerHTML = "Birthday: " + snapshot.val().Birthday;
+                    findHeight2.innerHTML = "Height: " + snapshot.val().Height;
+                    findWeight2.innerHTML = "Weight: " + snapshot.val().Weight;
+                } else {
+                    alert("No data found");
+                }
+            })
+            .catch((error)=>{
+                alert(error)
+            })
+            
+        }
 
       </script>
 </body>
