@@ -67,19 +67,19 @@
         // Reference to the database
         const dbRef = ref(db);
 
-        var findName1 = document.querySelector("#name:");
-        var findBirthday1 = document.querySelector("#birthday:");
-        var findHeight1 = document.querySelector("#height:");
-        var findWeight1 = document.querySelector("#weight:");
+        var findName1 = document.querySelector("#name");
+        var findBirthday1 = document.querySelector("#birthday");
+        var findHeight1 = document.querySelector("#height");
+        var findWeight1 = document.querySelector("#weight");
 
         // Fetch and display user 1 profile
         get(child(dbRef, userId1))
             .then((snapshot)=>{
                 if(snapshot.exists()){
-                    findName1.innerHTML = "Name: " + snapshot.val().Name;
-                    findBirthday1.innerHTML = "Birthday: " + snapshot.val().Birthday;
-                    findHeight1.innerHTML = "Height: " + snapshot.val().Height;
-                    findWeight1.innerHTML = "Weight: " + snapshot.val().Weight;
+                    findName1.innerHTML = "Name: " + snapshot.val().name;
+                    findBirthday1.innerHTML = "Birthday: " + snapshot.val().birthday;
+                    findHeight1.innerHTML = "Height: " + snapshot.val().height;
+                    findWeight1.innerHTML = "Weight: " + snapshot.val().weight;
                 } else {
                     alert("No data found");
                 }
