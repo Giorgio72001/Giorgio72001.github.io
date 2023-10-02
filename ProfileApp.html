@@ -81,6 +81,14 @@
             document.getElementById("userWeight1").textContent = user1Data.weight || "N/A";
     });
 
+        get(user2Ref).then((snapshot) => {
+            const user1Data = snapshot.val();
+            document.getElementById("userName2").textContent = user2Data.name || "N/A";
+            document.getElementById("userBirthday2").textContent = user2Data.birthday || "N/A";
+            document.getElementById("userHeight2").textContent = user2Data.height || "N/A";
+            document.getElementById("userWeight2").textContent = user2Data.weight || "N/A";
+    });
+
       </script>
 </body>
 </html>
