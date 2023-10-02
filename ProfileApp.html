@@ -15,101 +15,95 @@
 </head>
 <body>
     <div id="banner">
-    <img src="https://raw.githubusercontent.com/Giorgio72001/Giorgio72001.github.io/main/Sample%20Text.png" alt="Banner Image" style="max-width: 100%; height: auto; max-height: 200px;">
-</div>
-<div id="profileContainer">
-    <h1>User Profiles</h1>
-    <div id="profile1">
-        <h2>User 1 Profile</h2>
-        <p><strong>Name:</strong> <span id="userName1">User1Name</span></p>
-        <p><strong>Birthday:</strong> <span id="userBirthday1">User1Birthday</span></p>
-        <p><strong>Height:</strong> <span id="userHeight1">User1Height</span></p>
-        <p><strong>Weight:</strong> <span id="userWeight1">User1Weight</span></p>
+        <img src="https://raw.githubusercontent.com/Giorgio72001/Giorgio72001.github.io/main/Sample%20Text.png" alt="Banner Image" style="max-width: 100%; height: auto; max-height: 200px;">
     </div>
-    <div id="profile2">
-        <h2>User 2 Profile</h2>
-        <p><strong>Name:</strong> <span id="userName2">User2Name</span></p>
-        <p><strong>Birthday:</strong> <span id="userBirthday2">User2Birthday</span></p>
-        <p><strong>Height:</strong> <span id="userHeight2">User2Height</span></p>
-        <p><strong>Weight:</strong> <span id="userWeight2">User2Weight</span></p>
+    <div id="profileContainer">
+        <h1>User Profiles</h1>
+        <div id="profile1">
+            <h2>User 1 Profile</h2>
+            <p><strong>Name:</strong> <span id="userName1">Loading...</span></p>
+            <p><strong>Birthday:</strong> <span id="userBirthday1">Loading...</span></p>
+            <p><strong>Height:</strong> <span id="userHeight1">Loading...</span></p>
+            <p><strong>Weight:</strong> <span id="userWeight1">Loading...</span></p>
+        </div>
+        <div id="profile2">
+            <h2>User 2 Profile</h2>
+            <p><strong>Name:</strong> <span id="userName2">Loading...</span></p>
+            <p><strong>Birthday:</strong> <span id="userBirthday2">Loading...</span></p>
+            <p><strong>Height:</strong> <span id="userHeight2">Loading...</span></p>
+            <p><strong>Weight:</strong> <span id="userWeight2">Loading...</span></p>
+        </div>
     </div>
-</div>
 
     <script type="module">
 
         // Import Firebase modules
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
 
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyAt9M9ol2R9SRj7WEjP5hkQrxznzcOzrjA",
-        authDomain: "projectapp-d3660.firebaseapp.com",
-        databaseURL: "https://projectapp-d3660-default-rtdb.firebaseio.com",
-        projectId: "projectapp-d3660",
-        storageBucket: "projectapp-d3660.appspot.com",
-        messagingSenderId: "1058512365953",
-        appId: "1:1058512365953:web:23149de5fee7b1162b2080",
-        measurementId: "G-E6KT0FSD5Q"
-    };
+        // Firebase configuration 
+        const firebaseConfig = {
+            apiKey: "AIzaSyAt9M9ol2R9SRj7WEjP5hkQrxznzcOzrjA",
+            authDomain: "projectapp-d3660.firebaseapp.com",
+            databaseURL: "https://projectapp-d3660-default-rtdb.firebaseio.com",
+            projectId: "projectapp-d3660",
+            storageBucket: "projectapp-d3660.appspot.com",
+            messagingSenderId: "1058512365953",
+            appId: "1:1058512365953:web:23149de5fee7b1162b2080",
+            measurementId: "G-E6KT0FSD5Q"
+        };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
 
-        import {getDatabase, ref, get, set, child, update, remove}
-        from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+        // Import Firebase Realtime Database module
+        import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 
+        // Reference to the Firebase RTDB
         const db = getDatabase();
 
-        var findName1 = document.querySelector("#findName1");
-        var findBirthday1 = document.querySelector("#findBirthday1");
-        var findHeight1 = document.querySelector("#findHeight1");
-        var findWeight1 = document.querySelector("#findWeight1");
-        var findName2 = document.querySelector("#findName2");
-        var findBirthday2 = document.querySelector("#findBirthday2");
-        var findHeight2 = document.querySelector("#findHeight2");
-        var findWeight2 = document.querySelector("#findWeight2");
-
+        // User IDs for User 1 and User 2
         const userId1 = "5nodsgw8dHRCFYm7OKelwY79IS92";
         const userId2 = "OjSzyUXayUgcH8Ql5HLLjNoIl0G2";
-        
-        const dbref = ref(db);
 
-            get(child(dbref, findID.value))
-            .then((snapshot)=>{
-                if(snapshot.exists()){
-                    findName1.innerHTML = "Name: " + snapshot.val().Name;
-                    findBirthday1.innerHTML = "Birthday: " + snapshot.val().Birthday;
-                    findHeight1.innerHTML = "Height: " + snapshot.val().Height;
-                    findWeight1.innerHTML = "Weight: " + snapshot.val().Weight;
+        // Reference to the database
+        const dbRef = ref(db);
+
+        // Fetch and display user 1 profile
+        get(child(dbRef, `users/${userId1}`))
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const user1Data = snapshot.val();
+                    document.getElementById("userName1").textContent = "Name: " + user1Data.Name || "N/A";
+                    document.getElementById("userBirthday1").textContent = "Birthday: " + user1Data.Birthday || "N/A";
+                    document.getElementById("userHeight1").textContent = "Height: " + user1Data.Height || "N/A";
+                    document.getElementById("userWeight1").textContent = "Weight: " + user1Data.Weight || "N/A";
                 } else {
-                    alert("No data found");
+                    document.getElementById("userName1").textContent = "User 1 not found";
                 }
             })
-            .catch((error)=>{
-                alert(error)
-            })
-            
-        }
+            .catch((error) => {
+                console.error("Error fetching user 1 profile:", error);
+            });
 
-        get(child(dbref, findID.value))
-            .then((snapshot)=>{
-                if(snapshot.exists()){
-                    findName2.innerHTML = "Name: " + snapshot.val().Name;
-                    findBirthday2.innerHTML = "Birthday: " + snapshot.val().Birthday;
-                    findHeight2.innerHTML = "Height: " + snapshot.val().Height;
-                    findWeight2.innerHTML = "Weight: " + snapshot.val().Weight;
+        // Fetch and display user 2 profile
+        get(child(dbRef, `users/${userId2}`))
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const user2Data = snapshot.val();
+                    document.getElementById("userName2").textContent = "Name: " + user2Data.Name || "N/A";
+                    document.getElementById("userBirthday2").textContent = "Birthday: " + user2Data.Birthday || "N/A";
+                    document.getElementById("userHeight2").textContent = "Height: " + user2Data.Height || "N/A";
+                    document.getElementById("userWeight2").textContent = "Weight: " + user2Data.Weight || "N/A";
                 } else {
-                    alert("No data found");
+                    document.getElementById("userName2").textContent = "User 2 not found";
                 }
             })
-            .catch((error)=>{
-                alert(error)
-            })
-            
-        }
+            .catch((error) => {
+                console.error("Error fetching user 2 profile:", error);
+            });
 
-      </script>
+    </script>
 </body>
 </html>
