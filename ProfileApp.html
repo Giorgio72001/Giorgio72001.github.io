@@ -21,12 +21,14 @@
     <h1>User Profiles</h1>
     <div id="profile">
         <h2>User 1 Profile</h2>
+        <p><strong>Name:</strong> <span id="userName1">User1Name/span></p>
         <p><strong>Birthday:</strong> <span id="userBirthday1">User1Birthday</span></p>
         <p><strong>Height:</strong> <span id="userHeight1">User1Height</span></p>
         <p><strong>Weight:</strong> <span id="userWeight1">User1Weight</span></p>
     </div>
     <div id="profile">
         <h2>User 2 Profile</h2>
+        <p><strong>Name:</strong> <span id="userName2">User2Name/span></p>
         <p><strong>Birthday:</strong> <span id="userBirthday2">User2Birthday</span></p>
         <p><strong>Height:</strong> <span id="userHeight2">User2Height</span></p>
         <p><strong>Weight:</strong> <span id="userWeight2">User2Weight</span></p>
@@ -60,78 +62,12 @@
 
         const db = getDatabase();
 
-        var enterID = document.querySelector("#enterID");
-        var enterName = document.querySelector("#enterName");
-        var enterAge = document.querySelector("#enterAge");
-        var findID = document.querySelector("#findID");
         var findName = document.querySelector("#findName");
-        var findAge = document.querySelector("#findAge");
-      
+        var findBirthday = document.querySelector("#findBirthday");
+        var findHeight = document.querySelector("#findHeight");
+        var findWeight = document.querySelector("#findWeight");
 
-        var insertBtn = document.querySelector("#insert");
-        var updateBtn = document.querySelector("#update");
-        var removeBtn = document.querySelector("#remove");
-        var findBtn = document.querySelector("#find");
-
-        // function InsertData() {
-        //     set(ref(db, "People/"+ enterID.value),{
-        //         Name: enterName.value,
-        //         ID: enterID.value,
-        //         Age: enterAge.value
-        //     })
-        //     .then(()=>{
-        //         alert("Data added successfully");
-        //     })
-        //     .catch((error)=>{
-        //         alert(error);
-        //     });
-        // }
-
-        // function FindData() {
-        //     const dbref = ref(db);
-
-        //     get(child(dbref, "People/" + findID.value))
-        //     .then((snapshot)=>{
-        //         if(snapshot.exists()){
-        //             findName.innerHTML = "Name: " + snapshot.val().Name;
-        //             findAge.innerHTML = "Age: " + snapshot.val().Age;
-        //         } else {
-        //             alert("No data found");
-        //         }
-        //     })
-        //     .catch((error)=>{
-        //         alert(error)
-        //     })
-            
-        // }
-
-        // function UpdateData(){
-        //     update(ref(db, "People/"+ enterID.value),{
-        //         Name: enterName.value,
-        //         Age: enterAge.value
-        //     })
-        //     .then(()=>{
-        //         alert("Data updated successfully");
-        //     })
-        //     .catch((error)=>{
-        //         alert(error);
-        //     });
-        // }
-
-        // function RemoveData(){
-        //     remove(ref(db, "People/"+ enterID.value))
-        //     .then(()=>{
-        //         alert("Data deleted successfully");
-        //     })
-        //     .catch((error)=>{
-        //         alert(error);
-        //     });
-        // }
-
-        // insertBtn.addEventListener('click', InsertData);
-        // updateBtn.addEventListener('click', UpdateData);
-        // removeBtn.addEventListener('click', RemoveData);
-        // findBtn.addEventListener('click', FindData);
+        
 
       </script>
 </body>
