@@ -67,8 +67,8 @@
         var findHeight = document.querySelector("#findHeight");
         var findWeight = document.querySelector("#findWeight");
 
-        const userId1 = "5nodsgw8dHRCFYm7OKelwY79IS92/";
-        const userId2 = "OjSzyUXayUgcH8Ql5HLLjNoIl0G2/";
+        const userId1 = "5nodsgw8dHRCFYm7OKelwY79IS92";
+        const userId2 = "OjSzyUXayUgcH8Ql5HLLjNoIl0G2";
 
         const user1Ref = ref(database, `users/${userId1}`);
         const user2Ref = ref(database, `users/${userId2}`);
@@ -82,7 +82,7 @@
     });
 
         get(user2Ref).then((snapshot) => {
-            const user1Data = snapshot.val();
+            const user2Data = snapshot.val();
             document.getElementById("userName2").textContent = user2Data.name || "N/A";
             document.getElementById("userBirthday2").textContent = user2Data.birthday || "N/A";
             document.getElementById("userHeight2").textContent = user2Data.height || "N/A";
