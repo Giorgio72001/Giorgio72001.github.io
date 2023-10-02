@@ -73,7 +73,7 @@
         var findWeight1 = document.querySelector("#weight:");
 
         // Fetch and display user 1 profile
-        get(child(dbref, userId1))
+        get(child(dbRef, userId1))
             .then((snapshot)=>{
                 if(snapshot.exists()){
                     findName1.innerHTML = "Name: " + snapshot.val().Name;
