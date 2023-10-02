@@ -21,10 +21,10 @@
         <h1>User Profiles</h1>
         <div id="profile1">
             <h2>User 1 Profile</h2>
-            <p><strong>Name:</strong> <span id="name">Loading...</span></p>
-            <p><strong>Birthday:</strong> <span id="birthday">Loading...</span></p>
-            <p><strong>Height:</strong> <span id="height">Loading...</span></p>
-            <p><strong>Weight:</strong> <span id="weight">Loading...</span></p>
+            <p><strong>Name:</strong> <span id="name:">Loading...</span></p>
+            <p><strong>Birthday:</strong> <span id="birthday:">Loading...</span></p>
+            <p><strong>Height:</strong> <span id="height:">Loading...</span></p>
+            <p><strong>Weight:</strong> <span id="weight:">Loading...</span></p>
         </div>
         <div id="profile2">
             <h2>User 2 Profile</h2>
@@ -67,10 +67,10 @@
         // Reference to the database
         const dbRef = ref(db);
 
-        var findName1 = document.querySelector("#name");
-        var findBirthday1 = document.querySelector("#birthday");
-        var findHeight1 = document.querySelector("#height");
-        var findWeight1 = document.querySelector("#weight");
+        var findName1 = document.querySelector("#name:");
+        var findBirthday1 = document.querySelector("#birthday:");
+        var findHeight1 = document.querySelector("#height:");
+        var findWeight1 = document.querySelector("#weight:");
 
         // Fetch and display user 1 profile
         get(child(dbref, userID1))
