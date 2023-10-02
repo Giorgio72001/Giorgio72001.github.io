@@ -42,7 +42,7 @@
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
 
         // Firebase configuration 
-        const firebaseConfig = {
+         const firebaseConfig = {
             apiKey: "AIzaSyAt9M9ol2R9SRj7WEjP5hkQrxznzcOzrjA",
             authDomain: "projectapp-d3660.firebaseapp.com",
             databaseURL: "https://projectapp-d3660-default-rtdb.firebaseio.com",
@@ -57,13 +57,10 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
 
-        // Import Firebase Realtime Database module
-        import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-
         // Reference to the Firebase RTDB
         const db = getDatabase();
 
-        // User IDs for User 1 and User 2
+        // User IDs for User 1 and User 2 (Based on your database)
         const userId1 = "5nodsgw8dHRCFYm7OKelwY79IS92";
         const userId2 = "OjSzyUXayUgcH8Ql5HLLjNoIl0G2";
 
@@ -75,10 +72,10 @@
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     const user1Data = snapshot.val();
-                    document.getElementById("userName1").textContent = "Name: " + user1Data.Name || "N/A";
-                    document.getElementById("userBirthday1").textContent = "Birthday: " + user1Data.Birthday || "N/A";
-                    document.getElementById("userHeight1").textContent = "Height: " + user1Data.Height || "N/A";
-                    document.getElementById("userWeight1").textContent = "Weight: " + user1Data.Weight || "N/A";
+                    document.getElementById("userName1").textContent = "Name: " + user1Data.name || "N/A";
+                    document.getElementById("userBirthday1").textContent = "Birthday: " + user1Data.birthday || "N/A";
+                    document.getElementById("userHeight1").textContent = "Height: " + user1Data.height || "N/A";
+                    document.getElementById("userWeight1").textContent = "Weight: " + user1Data.weight || "N/A";
                 } else {
                     document.getElementById("userName1").textContent = "User 1 not found";
                 }
@@ -92,10 +89,10 @@
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     const user2Data = snapshot.val();
-                    document.getElementById("userName2").textContent = "Name: " + user2Data.Name || "N/A";
-                    document.getElementById("userBirthday2").textContent = "Birthday: " + user2Data.Birthday || "N/A";
-                    document.getElementById("userHeight2").textContent = "Height: " + user2Data.Height || "N/A";
-                    document.getElementById("userWeight2").textContent = "Weight: " + user2Data.Weight || "N/A";
+                    document.getElementById("userName2").textContent = "Name: " + user2Data.name || "N/A";
+                    document.getElementById("userBirthday2").textContent = "Birthday: " + user2Data.birthday || "N/A";
+                    document.getElementById("userHeight2").textContent = "Height: " + user2Data.height || "N/A";
+                    document.getElementById("userWeight2").textContent = "Weight: " + user2Data.weight || "N/A";
                 } else {
                     document.getElementById("userName2").textContent = "User 2 not found";
                 }
