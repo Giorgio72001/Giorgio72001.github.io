@@ -73,13 +73,20 @@
         const user1Ref = ref(database, `users/${userId1}`);
         const user2Ref = ref(database, `users/${userId2}`);
         
-        get(user1Ref).then((snapshot) => {
-            const user1Data = snapshot.val();
-            document.getElementById("userName1").textContent = user1Data.name || "N/A";
-            document.getElementById("userBirthday1").textContent = user1Data.birthday || "N/A";
-            document.getElementById("userHeight1").textContent = user1Data.height || "N/A";
-            document.getElementById("userWeight1").textContent = user1Data.weight || "N/A";
+        console.log("Fetching User 1 profile...");
+        get(user1Ref)
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    console.log("User 1 data retrieved:", snapshot.val());
+            // Rest of your code
+                } else {
+            console.log("User 1 data does not exist.");
+        }
+    })
+            .catch((error) => {
+                console.error("Error fetching user 1 profile:", error);
     });
+
 
         get(user2Ref).then((snapshot) => {
             const user2Data = snapshot.val();
